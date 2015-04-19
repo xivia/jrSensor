@@ -1,0 +1,19 @@
+create jdbc-datasource
+----------------------
+copy postgresql-9.3-1102.jdbc41.jar to the deployment directory (requires java 1.7)
+-> <install-directory>/standalone/deployments
+
+wait till JBoss has deployed the driver
+
+go to the admin page
+-> http://localhost:9990/console/App.html#datasources
+
+add a jdbc-datasource
+--> Name: jrSensorDS
+    JNDI Name: java:jboss/datasources/jrSensorDS
+--> chose driver postgresql-9.3-1102.jdbc41.jar
+--> Connection URL: jdbc:postgresql://localhost:5432/jrSensor
+    Username: jrsensor_user
+    Password: 123
+
+enable the datasource

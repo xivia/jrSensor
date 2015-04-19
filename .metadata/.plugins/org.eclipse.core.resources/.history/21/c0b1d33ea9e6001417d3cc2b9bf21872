@@ -1,0 +1,69 @@
+begin;
+
+create sequence seq_staKey; -- start/increment: 1/1
+
+create table tStation (
+
+);
+
+create sequence seq_senKey; -- start/increment: 1/1
+
+create table tSensor (
+
+);
+
+create sequence seq_sdaKey; -- start/increment: 1/1
+
+create table tSensorData (
+  sdaKey    int8 default nextval('seq_sdaKey'),
+  sdaSenId	int8,
+  sdaDtyId	int8,
+  sdaValue	double,
+  
+  constraint pk_sdaKey PRIMARY KEY (sdaKey),
+  constraint fk_sdaSenId FOREIGN KEY (sdaSenId) references tSensor (senKey) on delete CASCADE on update CASCADE DEFERRABLE initially DEFERRED, 
+  constraint fk_sdaDtyId FOREIGN KEY (sdaDtyId) references tSensor (dtyKey) on delete CASCADE on update CASCADE DEFERRABLE initially DEFERRED 
+  
+);
+
+create sequence seq_dtyKey; -- start/increment: 1/1
+
+create table tDataType (
+  dtyKey    int8 default nextval('seq_dtyKey'), 
+  dtyName   varchar(250),
+  dtyUnit	varchar(250),
+
+  constraint pk_dtyKey PRIMARY KEY (dtyKey)
+);
+
+
+
+
+
+
+
+
+create sequence seq_usrKey; -- start/increment: 1/1
+
+create table tUser (
+  usrKey       int8 default nextval('seq_usrKey'),
+  usrRolId     int8,
+  usrName      varchar(250),
+  usrPassword  varchar(250),
+  usrActiveYN  boolean,
+  
+  constraint pk_usrKey PRIMARY KEY (usrKey),
+  constraint fk_usrRolId FOREIGN KEY (usrRolId) references tRole (rolKey) on delete CASCADE on update CASCADE DEFERRABLE initially DEFERRED
+);
+
+insert into tUser (usrRolId, usrName, usrPassword, usrActiveYN) values (1, 'admin', '123', true);
+
+
+grant ALL ON seq_lnkKey TO jrlink_user;
+grant ALL ON tLink TO jrlink_user;
+grant ALL ON seq_rolKey TO jrlink_user;
+grant ALL ON tRole TO jrlink_user;
+grant ALL ON seq_usrKey TO jrlink_user;
+grant ALL ON tUser TO jrlink_user;
+
+commit;
