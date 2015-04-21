@@ -24,19 +24,21 @@ double temperatur;
 void setup() {
   Serial.begin(9600);
   delay(5000);
-  //connectServer();
-  //testServiceGET();
-  //checkStatus();
-  //connectServer();
-  //testService();
-  //checkStatus();
-  connectServer();
-  testServicePOST();
-  checkStatus();
 }
 
 void loop()
 {
+  // Wichtig bei starten des Boards funktioniert die Verbindung erst nach mehreren Versuchen.
+  while(!clientConnected)
+  {
+    connectServer();
+  }
+  if(clientConnected)
+  {
+    testServicePOST();
+    checkStatus();
+  }
+  
   
 }
 
@@ -115,27 +117,22 @@ void testServicePOST()
 
 void checkStatus()
 {
-  if (DEBUGGER){
-    Serial.print("Test CheckStatus --> ");
-    Serial.println(clientConnected);
-  }
-  
-  if (clientConnected){
-    if (DEBUGGER){
-      Serial.print("client.available() --> ");
-      Serial.println(client.available());
-    }
-    
-    while (client.available()) {
+  if (clientConnected)
+  {    
+    // Ausgabe der Daten
+    while (client.available())
+    {
       char c = client.read();
       Serial.print(c);
     }
 
-    if (!client.connected()) {
-      Serial.println();
-      Serial.println("disconnecting.");
-      client.stop();
-      clientConnected = false;
+    client.stop();
+    
+    if (!client.connected()) 
+    {
+    Serial.println("disconnecting.");
+    clientConnected = false;
+    Serial.println();
     }
   }
 }
