@@ -2,5 +2,9 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="jrSensorEJB">
 		<jta-data-source>java:jboss/datasources/jrSensorDS</jta-data-source>
+		<class>ch.ffhs.sema.model.DataType</class>
+		<class>ch.ffhs.sema.model.Sensor</class>
+		<class>ch.ffhs.sema.model.SensorData</class>
+		<class>ch.ffhs.sema.model.Station</class>
 	</persistence-unit>
 </persistence>
