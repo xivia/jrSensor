@@ -18,11 +18,14 @@ public class Station implements Serializable {
 	@Id
 	@SequenceGenerator(name="TSTATION_STAKEY_GENERATOR", sequenceName="SEQ_STAKEY")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TSTATION_STAKEY_GENERATOR")
-	private Long stakey;
+	@Column(name="stakey")
+	private Long id;
 
-	private String stadescription;
+	@Column(name="stadescription")
+	private String description;
 
-	private String staname;
+	@Column(name="staname")
+	private String name;
 
 	//bi-directional many-to-one association to Sensor
 	@OneToMany(mappedBy="station")
@@ -31,28 +34,28 @@ public class Station implements Serializable {
 	public Station() {
 	}
 
-	public Long getStakey() {
-		return this.stakey;
+	public Long getId() {
+		return this.id;
 	}
 
-	public void setStakey(Long stakey) {
-		this.stakey = stakey;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getStadescription() {
-		return this.stadescription;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setStadescription(String stadescription) {
-		this.stadescription = stadescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getStaname() {
-		return this.staname;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setStaname(String staname) {
-		this.staname = staname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<Sensor> getSensors() {

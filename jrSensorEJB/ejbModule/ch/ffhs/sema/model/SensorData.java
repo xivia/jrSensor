@@ -18,11 +18,14 @@ public class SensorData implements Serializable {
 	@Id
 	@SequenceGenerator(name="TSENSORDATA_SDAKEY_GENERATOR", sequenceName="SEQ_SDAKEY")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TSENSORDATA_SDAKEY_GENERATOR")
-	private Long sdakey;
+	@Column(name="sdakey")
+	private Long id;
 
-	private Timestamp sdadt;
+	@Column(name="sdadt")
+	private Timestamp timestamp;
 
-	private double sdavalue;
+	@Column(name="sdavalue")
+	private double value;
 
 	//bi-directional many-to-one association to DataType
 	@ManyToOne
@@ -37,28 +40,28 @@ public class SensorData implements Serializable {
 	public SensorData() {
 	}
 
-	public Long getSdakey() {
-		return this.sdakey;
+	public Long getId() {
+		return this.id;
 	}
 
-	public void setSdakey(Long sdakey) {
-		this.sdakey = sdakey;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Timestamp getSdadt() {
-		return this.sdadt;
+	public Timestamp getTimestamp() {
+		return this.timestamp;
 	}
 
-	public void setSdadt(Timestamp sdadt) {
-		this.sdadt = sdadt;
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
-	public double getSdavalue() {
-		return this.sdavalue;
+	public double getValue() {
+		return this.value;
 	}
 
-	public void setSdavalue(double sdavalue) {
-		this.sdavalue = sdavalue;
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	public DataType getDatatype() {

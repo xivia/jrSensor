@@ -18,11 +18,14 @@ public class DataType implements Serializable {
 	@Id
 	@SequenceGenerator(name="TDATATYPE_DTYKEY_GENERATOR", sequenceName="SEQ_DTYKEY")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TDATATYPE_DTYKEY_GENERATOR")
-	private Long dtykey;
+	@Column(name="dtykey")
+	private Long id;
 
-	private String dtyname;
+	@Column(name="dtyname")
+	private String name;
 
-	private String dtyunit;
+	@Column(name="dtyunit")
+	private String unit;
 
 	//bi-directional many-to-one association to SensorData
 	@OneToMany(mappedBy="datatype")
@@ -31,28 +34,28 @@ public class DataType implements Serializable {
 	public DataType() {
 	}
 
-	public Long getDtykey() {
-		return this.dtykey;
+	public Long getId() {
+		return this.id;
 	}
 
-	public void setDtykey(Long dtykey) {
-		this.dtykey = dtykey;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getDtyname() {
-		return this.dtyname;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setDtyname(String dtyname) {
-		this.dtyname = dtyname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDtyunit() {
-		return this.dtyunit;
+	public String getUnit() {
+		return this.unit;
 	}
 
-	public void setDtyunit(String dtyunit) {
-		this.dtyunit = dtyunit;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public List<SensorData> getSensordata() {
