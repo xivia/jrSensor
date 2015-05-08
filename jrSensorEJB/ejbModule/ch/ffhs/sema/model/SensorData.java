@@ -1,7 +1,9 @@
 package ch.ffhs.sema.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 
 
@@ -11,7 +13,10 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="tsensordata")
-@NamedQuery(name="SensorData.findAll", query="SELECT s FROM SensorData s")
+@NamedQueries({
+	@NamedQuery(name="SensorData.findAll", query="SELECT s FROM SensorData s"),
+	@NamedQuery(name="SensorData.findBySensor", query="SELECT s FROM SensorData s WHERE s.sensor = :sensor")
+}) 
 public class SensorData implements Serializable {
 	private static final long serialVersionUID = 1L;
 

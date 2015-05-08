@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ch.ffhs.sema.model.Sensor;
+import ch.ffhs.sema.model.SensorData;
 import ch.ffhs.sema.model.Station;
 
 /**
@@ -30,6 +31,9 @@ public class ManagerServlet extends HttpServlet {
 	
 	@EJB
 	private SensorBeanLocal sensorBean;
+	
+	@EJB
+	private SensorDataBeanLocal sensorDataBean;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -49,18 +53,20 @@ public class ManagerServlet extends HttpServlet {
 		
 		// sensor
 		String sensor = request.getParameter("sensor");
-		if (sensor == null) sensor = "0";
+		if ((station.compareTo("0") == 0) || (sensor == null)) sensor = "0";
 		
 		ServletContext sc = getServletContext();
 		
 		//fill lists
 		Collection<Station> ejbResultStation = stationBean.getList();
 		Collection<Sensor> ejbResultSensor = sensorBean.getListByStation(Long.parseLong(station));
+		Collection<SensorData> ejbResultSensorData = sensorDataBean.getListBySensor(Long.parseLong(sensor));
 		
 		request.setAttribute("station", station);
 		request.setAttribute("sensor", sensor);
 		request.setAttribute("resultListStation", ejbResultStation);
 		request.setAttribute("resultListSensor", ejbResultSensor);
+		request.setAttribute("resultListSensorData", ejbResultSensorData);
 		
 		RequestDispatcher rdDefault = sc.getRequestDispatcher(urlList);
 		rdDefault.forward(request, response);
