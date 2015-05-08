@@ -15,7 +15,7 @@ public interface SensorBeanLocal {
 	Collection<Sensor> getList();
 
 	/**
-	 * get all records
+	 * get records by station
 	 */	
 	Collection<Sensor> getListByStation(Long stationId);
 	
