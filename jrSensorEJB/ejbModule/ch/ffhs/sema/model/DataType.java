@@ -1,7 +1,9 @@
 package ch.ffhs.sema.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -11,13 +13,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="tdatatype")
-@NamedQuery(name="DataType.findAll", query="SELECT d FROM DataType d")
+@NamedQueries({
+	@NamedQuery(name="DataType.findAll", query="SELECT d FROM DataType d"),
+	@NamedQuery(name="DataType.findByUnit", query="SELECT d FROM DataType d WHERE d.unit = :unit")
+}) 
 public class DataType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TDATATYPE_DTYKEY_GENERATOR", sequenceName="SEQ_DTYKEY")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TDATATYPE_DTYKEY_GENERATOR")
+	@SequenceGenerator(name="DATATYPE_ID_GENERATOR", sequenceName="SEQ_DTYKEY", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DATATYPE_ID_GENERATOR")
 	@Column(name="dtykey")
 	private Long id;
 

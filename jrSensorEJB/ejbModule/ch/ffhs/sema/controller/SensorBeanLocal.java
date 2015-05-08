@@ -23,16 +23,21 @@ public interface SensorBeanLocal {
 	 * get one record by id
 	 */
 	Sensor getById(Long id);
+	
+	/**
+	 * get records by name
+	 */
+	Collection<Sensor> getByName(String name);
 
 	/**
 	 * add record
 	 */
-	Long create(String name, String description);
+	Long create(Long station, String name, String description);
 	
 	/**
 	 * update record
 	 */
-	void update(Long id, String name, String description);
+	void update(Long id, Long station, String name, String description);
 	
 	/**
 	 * delete record

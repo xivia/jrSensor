@@ -21,8 +21,8 @@ public class SensorData implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TSENSORDATA_SDAKEY_GENERATOR", sequenceName="SEQ_SDAKEY")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TSENSORDATA_SDAKEY_GENERATOR")
+	@SequenceGenerator(name="SENSORDATA_ID_GENERATOR", sequenceName="SEQ_SDAKEY", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SENSORDATA_ID_GENERATOR")
 	@Column(name="sdakey")
 	private Long id;
 

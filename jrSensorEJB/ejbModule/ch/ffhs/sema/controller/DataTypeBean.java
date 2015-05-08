@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import ch.ffhs.sema.model.DataType;
 
@@ -32,6 +33,13 @@ public class DataTypeBean implements DataTypeBeanLocal {
 		return em.find(DataType.class, new Long(id));
 	}
 
+	@Override
+	public Collection<DataType> getByUnit(String unit) {
+		TypedQuery<DataType> q = em.createNamedQuery("DataType.findByUnit", DataType.class);	
+		q.setParameter("unit", unit);
+		return q.getResultList();
+	}
+	
 	@Override
 	public Long create(String name, String unit) {
 		DataType dataType = new DataType();

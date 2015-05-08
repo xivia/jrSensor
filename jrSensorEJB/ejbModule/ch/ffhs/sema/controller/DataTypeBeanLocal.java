@@ -20,6 +20,11 @@ public interface DataTypeBeanLocal {
 	DataType getById(Long id);
 
 	/**
+	 * get records by unit
+	 */
+	Collection<DataType> getByUnit(String unit);
+	
+	/**
 	 * add record
 	 */
 	Long create(String name, String unit);

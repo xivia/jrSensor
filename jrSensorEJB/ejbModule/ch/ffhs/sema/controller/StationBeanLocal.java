@@ -20,6 +20,11 @@ public interface StationBeanLocal {
 	Station getById(Long id);
 
 	/**
+	 * get records by name
+	 */
+	Collection<Station> getByName(String name);
+
+	/**
 	 * add record
 	 */
 	Long create(String name, String description);

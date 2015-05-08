@@ -1,7 +1,9 @@
 package ch.ffhs.sema.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -11,13 +13,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="tstation")
-@NamedQuery(name="Station.findAll", query="SELECT s FROM Station s")
+@NamedQueries({
+	@NamedQuery(name="Station.findAll", query="SELECT s FROM Station s"),
+	@NamedQuery(name="Station.findByName", query="SELECT s FROM Station s WHERE s.name = :name")
+})	
 public class Station implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TSTATION_STAKEY_GENERATOR", sequenceName="SEQ_STAKEY")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TSTATION_STAKEY_GENERATOR")
+	@SequenceGenerator(name="STATION_ID_GENERATOR", sequenceName="SEQ_STAKEY", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="STATION_ID_GENERATOR")
 	@Column(name="stakey")
 	private Long id;
 

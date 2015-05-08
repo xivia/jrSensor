@@ -1,7 +1,9 @@
 package ch.ffhs.sema.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -13,14 +15,15 @@ import java.util.List;
 @Table(name="tsensor")
 @NamedQueries({
 	@NamedQuery(name="Sensor.findAll", query="SELECT s FROM Sensor s"),
+	@NamedQuery(name="Sensor.findByName", query="SELECT s FROM Sensor s WHERE s.name = :name"),
 	@NamedQuery(name="Sensor.findByStation", query="SELECT s FROM Sensor s WHERE s.station = :station"),
 }) 
 public class Sensor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TSENSOR_SENKEY_GENERATOR", sequenceName="SEQ_SENKEY")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TSENSOR_SENKEY_GENERATOR")
+	@SequenceGenerator(name="SENSOR_ID_GENERATOR", sequenceName="SEQ_SENKEY", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SENSOR_ID_GENERATOR")
 	@Column(name="senkey")
 	private Long id;
 

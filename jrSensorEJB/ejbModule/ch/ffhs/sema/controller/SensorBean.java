@@ -45,9 +45,17 @@ public class SensorBean implements SensorBeanLocal {
 	}
 
 	@Override
-	public Long create(String name, String description) {
+	public Collection<Sensor> getByName(String name) {
+		TypedQuery<Sensor> q = em.createNamedQuery("Sensor.findByName", Sensor.class);	
+		q.setParameter("name", name);
+		return q.getResultList();
+	}
+	
+	@Override
+	public Long create(Long station, String name, String description) {
 		Sensor sensor = new Sensor();
 		
+		sensor.setStation(stationBean.getById(station));
 		sensor.setName(name);
 		sensor.setDescription(description);
 		
@@ -58,9 +66,10 @@ public class SensorBean implements SensorBeanLocal {
 	}
 
 	@Override
-	public void update(Long id, String name, String description) {
+	public void update(Long id, Long station, String name, String description) {
 		Sensor sensor = getById(id);
 		
+		sensor.setStation(stationBean.getById(station));
 		sensor.setName(name);
 		sensor.setDescription(description);
 		

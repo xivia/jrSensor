@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import ch.ffhs.sema.model.Station;
 
@@ -32,6 +33,13 @@ public class StationBean implements StationBeanLocal {
 		return em.find(Station.class, new Long(id));
 	}
 
+	@Override
+	public Collection<Station> getByName(String name) {
+		TypedQuery<Station> q = em.createNamedQuery("Station.findByName", Station.class);	
+		q.setParameter("name", name);
+		return q.getResultList();
+	}
+	
 	@Override
 	public Long create(String name, String description) {
 		Station station = new Station();
