@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="tsensor")
-@NamedQuery(name="Sensor.findAll", query="SELECT s FROM Sensor s")
+@NamedQueries({
+	@NamedQuery(name="Sensor.findAll", query="SELECT s FROM Sensor s"),
+	@NamedQuery(name="Sensor.findByStation", query="SELECT s FROM Sensor s WHERE s.station = :station"),
+}) 
 public class Sensor implements Serializable {
 	private static final long serialVersionUID = 1L;
 

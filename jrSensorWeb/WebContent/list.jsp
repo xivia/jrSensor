@@ -11,24 +11,26 @@
 	<h2>jrSensor</h2>
 	<br />
 	
-	<table>
-	<tr>
-		<td>key</td>
-		<td>&nbsp;</td>
-		<td>name</td>
-		<td>&nbsp;</td>
-		<td>description</td>
-	</tr>
-	<c:forEach var="item" items="${resultList}">
-  		<tr>
- 	 		<td>${item.id}</td>
- 	 		<td>&nbsp;</td>
-  			<td>${item.name}</td>
-  			<td>&nbsp;</td>
-  			<td>${item.description}</td>
-  		</tr>
-	</c:forEach>
-	</table>
+	<!-- select station/sensor -->
+	<form name="myForm" method="get" action="" accept-charset="UTF-8">
+		Station: 
+		<select name="station" onchange="submit();">
+			<option value="0">Bitte Station wählen
+			<c:forEach var="itemSta" items="${resultListStation}">
+			<option<c:if test="${station == itemSta.id}"> selected</c:if> value="${itemSta.id}">${itemSta.name}
+			</c:forEach>
+		</select>
+		<br />
+		Sensor: 
+		<select name="sensor" onchange="submit();">
+			<option value="0">Bitte Sensor wählen
+			<c:forEach var="itemSen" items="${resultListSensor}">
+			<option<c:if test="${sensor == itemSen.id}"> selected</c:if> value="${itemSen.id}">${itemSen.name}
+			</c:forEach>
+		</select>
+	</form>
+	
+	<!-- list data -->
 	
 	<br />
 </body>

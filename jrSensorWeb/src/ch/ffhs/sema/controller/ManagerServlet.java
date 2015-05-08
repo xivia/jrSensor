@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ch.ffhs.sema.model.Sensor;
 import ch.ffhs.sema.model.Station;
 
 /**
@@ -27,6 +28,9 @@ public class ManagerServlet extends HttpServlet {
 	@EJB
 	private StationBeanLocal stationBean;
 	
+	@EJB
+	private SensorBeanLocal sensorBean;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,14 +43,26 @@ public class ManagerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// station
+		String station = request.getParameter("station");
+		if (station == null) station = "0";
+		
+		// sensor
+		String sensor = request.getParameter("sensor");
+		if (sensor == null) sensor = "0";
+		
 		ServletContext sc = getServletContext();
 		
-		//fill list
-		Collection<Station> ejbResult = stationBean.getList();
+		//fill lists
+		Collection<Station> ejbResultStation = stationBean.getList();
+		Collection<Sensor> ejbResultSensor = sensorBean.getListByStation(Long.parseLong(station));
+		
+		request.setAttribute("station", station);
+		request.setAttribute("sensor", sensor);
+		request.setAttribute("resultListStation", ejbResultStation);
+		request.setAttribute("resultListSensor", ejbResultSensor);
 		
 		RequestDispatcher rdDefault = sc.getRequestDispatcher(urlList);
-		
-		request.setAttribute("resultList", ejbResult);
 		rdDefault.forward(request, response);
 	}
 
