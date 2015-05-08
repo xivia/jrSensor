@@ -17,7 +17,7 @@
 	<tr>
 		<td>Station: </td> 
 		<td>
-		<select name="station" onchange="submit();">
+		<select name="station" onchange="myForm.sensor.selectedIndex = 0;submit();">
 			<option value="0">Bitte Station wählen
 			<c:forEach var="itemSta" items="${resultListStation}">
 			<option<c:if test="${station == itemSta.id}"> selected</c:if> value="${itemSta.id}">${itemSta.name}
