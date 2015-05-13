@@ -20,7 +20,7 @@ byte MAC[] = {0x90, 0xA2, 0xDA, 0x0D, 0x4E, 0x71 };
 byte SERVER[] = { 192, 168, 79, 10 }; // WebServer Rasspary Pi
 int PORT = 8080;  // Port zu WildFly
 EthernetClient client;
-boolean DEBUGGER = false;
+boolean DEBUGGER = true;
 boolean clientConnected = false;
 double temperatur;
 
@@ -38,7 +38,9 @@ void loop()
   }
   if(clientConnected)
   {
-    testServicePOST();
+    //testServicePOST();
+    //checkStatus();
+    jrSensorServicePOST();
     checkStatus();
   }
   
@@ -125,6 +127,40 @@ void testServicePOST()
 
 }
 
+void jrSensorServicePOST()
+{  
+  String temperatur;
+  getTemp(temperatur);
+  String tempData = temperatur;
+
+  
+  //String data = "{ \"name\" : \"testJHE\", \"url\" : \"" + tempData;
+  
+  String data = "{ \"station\" : \"Station2\", \"sensor\" : \"Sensor3\", \"value\" : \" "+ tempData + "\", \"unit\":\"m\"}";
+  
+  
+  if (DEBUGGER){
+    Serial.print("data POST String --> ");
+    Serial.println(data);
+  }
+
+  client.println("POST /jrSensorWeb/ws/sensor/ HTTP/1.1"); 
+  client.println("Content-Type: application/json"); 
+  client.print("Content-Length: "); 
+  client.println(data.length()); 
+  client.println(); 
+  client.print(data);
+  client.println();
+  
+  if (DEBUGGER){
+    // Delay wird für die Ausgabe über Serial.print benötigt
+    delay(1000);
+    Serial.print("nach dem POST --> client.available() --> ");
+    Serial.println(client.available());
+  }  
+
+}
+
 void checkStatus()
 {
   if (clientConnected)
@@ -180,7 +216,7 @@ void getTemp(String &dest)
   // DISPLAY DATA
   String data;
   //data = String(DHT.humidity, 1);
-  data = String(DHT.humidity, 1) + ",Temp: ";
+  //data = String(DHT.humidity, 1) + ",Temp: ";
   data = data + String(DHT.temperature, 1);
   dest = data;
 }
