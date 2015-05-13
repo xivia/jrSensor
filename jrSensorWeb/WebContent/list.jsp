@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,13 +45,19 @@
 	<!-- list data -->
 	<table>
 	<tr>
+		<td>Datum/Zeit</td>
+		<td>&nbsp;</td>
 		<td>Wert</td>
 		<td>&nbsp;</td>
 		<td>Einheit</td>
 	</tr>
 	<c:forEach var="itemSenDat" items="${resultListSensorData}">
-	<tr>	
-		<td>${itemSenDat.value}</td><td>&nbsp;</td><td>${itemSenDat.datatype.unit}</td>
+	<tr>
+		<td><fmt:formatDate value="${itemSenDat.timestamp}" pattern="dd.MM.yyyy HH:mm:ss" /></td>
+		<td>&nbsp;</td>	
+		<td>${itemSenDat.value}</td>
+		<td>&nbsp;</td>
+		<td>${itemSenDat.datatype.unit}</td>
 	</tr>
 	</c:forEach>
 	</table>

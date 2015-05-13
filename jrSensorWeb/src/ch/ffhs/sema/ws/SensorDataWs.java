@@ -124,6 +124,7 @@ public class SensorDataWs {
 				Map<String, String> myMap = new LinkedHashMap<String, String>();
 				myMap.put("station", item.getSensor().getStation().getName());
 				myMap.put("sensor", item.getSensor().getName());
+				myMap.put("timestamp", item.getTimestamp().toString());
 				myMap.put("value", String.valueOf(item.getValue()));
 				myMap.put("unit", item.getDatatype().getUnit());
 				
