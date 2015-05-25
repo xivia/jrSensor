@@ -1,0 +1,8 @@
+#!/bin/bash
+
+WERTE=$(sudo ./loldht 7 | grep Humidity)
+Temp=( $(echo $WERTE | awk '{ print $ 3}'))
+Hum=( $(echo $WERTE | awk '{ print $ 7}'))
+echo $WERTE
+echo "Humidity: $Hum"
+echo "Temperature: $Temp"
