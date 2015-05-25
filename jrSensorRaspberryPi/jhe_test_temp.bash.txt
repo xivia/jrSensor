@@ -1,5 +1,8 @@
 #!/bin/bash
 
+i=0
+while [ $i -le 30 ]
+do
 	# Hollt die Daten vom Sensor und speichert die Zeile mit Humidity in WERTE ab
 	WERTE=$(sudo ./loldht 7 | grep Humidity)
 	# Temperatur und Luftfeuchtikeit in die Variablen abspeichern
@@ -13,3 +16,5 @@
 	# echo $sensor
 	# Web Service mit dem POST
 	curl -X POST -H "Content-Type: application/json" --data $sensor  http://192.168.79.11:8080/jrSensorWeb/ws/sensor/
+	sleep 10
+done
