@@ -17,7 +17,7 @@ dht DHT;
 
 // Bei mehreren Arduinos muss die MAC unterschiedlich sein
 byte MAC[] = {0x90, 0xA2, 0xDA, 0x0D, 0x4E, 0x71 };
-byte SERVER[] = { 192, 168, 79, 10 }; // WebServer Rasspary Pi
+byte SERVER[] = { 192, 168, 79, 11 }; // WebServer Rasspary Pi
 int PORT = 8080;  // Port zu WildFly
 EthernetClient client;
 boolean DEBUGGER = true;
@@ -42,6 +42,7 @@ void loop()
     //checkStatus();
     jrSensorServicePOST();
     checkStatus();
+    delay(10000);
   }
   
   
@@ -59,7 +60,7 @@ void connectServer(){
   }
   
   // Verbindung mit dem Server herstellen
-  delay(500);
+  delay(1000);
   if (client.connect(SERVER, PORT)) {
     if (DEBUGGER){
       Serial.println("connected");
