@@ -5,9 +5,10 @@
   date		17.04.2015
 
  */
-
+//Ethernet
 #include <SPI.h>
 #include <Ethernet.h>
+//DHT Sensor
 #include <dht.h>
 
 #define DHT11_PIN 2
