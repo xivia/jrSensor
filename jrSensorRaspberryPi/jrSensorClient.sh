@@ -19,8 +19,8 @@ do
 	VALUE=$(sudo ./lol_dht22/loldht 7 | grep "Humidity")
 
 	# extract temperature and humidity
-	TEMP=( $(echo $VALUE | awk '{ print $3}'))
-	HUM=( $(echo $VALUE | awk '{ print $7}'))
+	HUM=( $(echo $VALUE | awk '{ print $3}'))
+	TEMP=( $(echo $VALUE | awk '{ print $7}'))
 
 	DATA='{"station":"Station1","sensor":"Sensor1","value":"'$TEMP'","unit":"C"}'
 
