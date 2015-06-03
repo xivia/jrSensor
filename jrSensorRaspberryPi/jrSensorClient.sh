@@ -22,7 +22,7 @@ do
 	HUM=( $(echo $VALUE | awk '{ print $3}'))
 	TEMP=( $(echo $VALUE | awk '{ print $7}'))
 
-	DATA='{"station":"Station1","sensor":"Sensor1","value":"'$TEMP'","unit":"C"}'
+	DATA='{"station":"Raspberry_1","sensor":"Sensor_R_1","value":"'$TEMP'","unit":"C"}'
 
 	# debug
 	# echo $VALUE

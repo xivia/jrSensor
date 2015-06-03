@@ -4,11 +4,13 @@
   created by	joerg herzig / roman born
   date		17.04.2015
 
- */
-//Ethernet
+*/
+
+// ethernet
 #include <SPI.h>
 #include <Ethernet.h>
-//DHT Sensor
+
+// sensor
 #include <dht.h>
 
 #define DHT11_PIN 2
@@ -76,7 +78,7 @@ void jrSensorServicePOST()
   String temperatur;
   getTemp(temperatur);
 
-  String data = "{ \"station\" : \"Station2\", \"sensor\" : \"Sensor3\", \"value\" : \" "+ temperatur + "\", \"unit\":\"C\"}";
+  String data = "{ \"station\" : \"Arduino_1\", \"sensor\" : \"Sensor_A_1\", \"value\" : \" "+ temperatur + "\", \"unit\":\"C\"}";
   
   if (DEBUG){
     Serial.print("data POST String --> ");
